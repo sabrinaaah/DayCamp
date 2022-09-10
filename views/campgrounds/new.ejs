@@ -1,10 +1,10 @@
 <% layout('layouts/boilerplate') %>
 <div class="row">
-    <h1 class="text-center">New Campground</h1>
+    <h1 class="text-center">New Camp</h1>
     <div class="col-md-6 offset-md-3">
         <div class=" card">
             <div class="card-body">
-                <form action="/campgrounds" method="POST" novalidate class="validated-form"
+                <form action="/daycamp" method="POST" novalidate class="validated-form"
                     enctype="multipart/form-data">
                     <div class="mb-3">
                         <label class="form-label" for="title">Title</label>
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class"form-label" for="price">Campground Price</label>
+                        <label class"form-label" for="price">Price Per Hour</label>
                         <div class="input-group">
                             <span class="input-group-text" id="price-label">$</span>
                             <input type="text" class="form-control" id="price" name="campground[price]"
@@ -40,9 +40,9 @@
                         <label for="image" class="form-label">Upload Images</label>
                         <input class="form-control" name="image" type="file" id="image" multiple>
                     </div>
-                    <div class="mb-3"><button class="btn btn-success">Add Campground</button></div>
-                    <button class="btn btn-primary"><a class="text-white" href="/campgrounds">All
-                            Campgrounds</a></button>
+                    <div class="mb-3"><button class="btn btn-success">Add Day Camp</button></div>
+                    <button class="btn btn-primary"><a class="text-white" href="/daycamp">All
+                            Day Camps</a></button>
                 </form>
             </div>
         </div>

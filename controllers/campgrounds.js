@@ -26,9 +26,8 @@ module.exports.createCampground = async (req, res, next) => {
     campground.author = req.user._id
     campground.geometry = geoData.body.features[0].geometry
     await campground.save()
-    console.log(campground)
     req.flash('success', 'Successfully made a new campground')
-    res.redirect(`/campgrounds/${campground._id}`)
+    res.redirect(`/daycamp/${campground._id}`)
 }
 
 module.exports.showCampground = async (req, res) => {
@@ -39,7 +38,7 @@ module.exports.showCampground = async (req, res) => {
         .populate('author')
     if (!campground) {
         req.flash('error', 'Cannot find that campground!')
-        return res.redirect('/campgrounds')
+        return res.redirect('/daycamp')
     }
     res.render('campgrounds/show', { campground })
 }
@@ -48,7 +47,7 @@ module.exports.renderEditForm = async (req, res) => {
     const campground = await Campground.findById(id)
     if (!campground) {
         req.flash('error', 'Cannot find that campground')
-        return res.redirect('/campgrounds')
+        return res.redirect('/daycamp')
     }
     res.render('campgrounds/edit', { campground })
 }
@@ -67,12 +66,12 @@ module.exports.updateCampground = async (req, res) => {
     }
     await campground.save()
     req.flash('success', 'Successfully updated campground!')
-    res.redirect(`/campgrounds/${campground._id}`)
+    res.redirect(`/daycamp/${campground._id}`)
 }
 
 module.exports.deleteCampground = async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id)
     req.flash('success', 'Successfully deleted your campground!')
-    res.redirect('/campgrounds')
+    res.redirect('/daycamp')
 }

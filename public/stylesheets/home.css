@@ -12,7 +12,7 @@
 body {
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://images.unsplash.com/photo-1559863634-ec9c93aaf2d6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2892&q=80");
+    url("https://res.cloudinary.com/doyayes9t/image/upload/v1662746614/DayCamp/camilo-fierro-z7rcwqCi77s-unsplash_t7f0ya.jpg");
     background-size: cover;
     background-position: center;
     text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);

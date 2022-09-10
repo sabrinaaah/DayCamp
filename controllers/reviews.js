@@ -10,12 +10,12 @@ module.exports.createReview = async (req, res) => {
     await review.save()
     await campground.save()
     req.flash('success', 'Created new review!')
-    res.redirect(`/campgrounds/${campground._id}`)
+    res.redirect(`/daycamp/${campground._id}`)
 }
 module.exports.deleteReview = async (req, res) => {
     const { id, reviewId } = req.params
     await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } })
     await Review.findByIdAndDelete(reviewId)
     req.flash('success', "Deleted your review!")
-    res.redirect(`/campgrounds/${id}`)
+    res.redirect(`/daycamp/${id}`)
 }
