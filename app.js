@@ -20,7 +20,11 @@ const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp')
+const MongoStore = require('connect-mongo');
+
+
+const dbURL = prcoess.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'
+mongoose.connect(dbURL)
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"))
@@ -37,14 +41,27 @@ app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(mongoSanitize())
 
+const secret = process.env.SECRET || "thisshouldbeabettersecret"
+
+const store = MongoStore.create({
+    mongoUrl: dbURL,
+    touchAfter: 24 * 60 * 60,
+    secret
+})
+
+store.on("error", function(e) {
+    console.log("Session store error!", e)
+})
+
 const sessionConfig = {
+    store,
     name: 'session',
-    secret: 'thisshouldbeabettersecret',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        sameSite: "lax",
+        // sameSite: "lax",
         // secure: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
